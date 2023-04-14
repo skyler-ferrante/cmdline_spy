@@ -1,9 +1,6 @@
 # cmdline_spy
 
 Works like snoopy, but instead of hooking execv we just poll /proc/ for new processes.
-Useful when we have low privilege code execution and we want to privilege escalate.
-
-Also useful to just see what a server is used for.
 
 ## Permissions
 
