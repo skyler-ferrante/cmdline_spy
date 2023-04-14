@@ -3,11 +3,6 @@
 Works like snoopy, but instead of hooking execv we just poll /proc/ for new processes.
 Useful when we have low privilege code execution and we want to privilege escalate.
 
-Sometimes people do things like:
-```
-echo 'user:newpassword' | chpasswd
-```
-
 Also useful to just see what a server is used for.
 
 ## Permissions
