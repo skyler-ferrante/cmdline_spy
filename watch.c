@@ -52,6 +52,8 @@ int main(){
 			curr_e_fp = open(current_file_name, O_RDONLY);
 			
 			int ra = read(curr_e_fp, buf, BUFSIZ-1);
+
+			close(curr_e_fp);
 			
 			for(int i = 0; i<ra-1; i++)
 				if(buf[i] == '\0') buf[i] = ' ';
@@ -61,7 +63,8 @@ int main(){
 
 			write(1, buf, ra);
 		}
+		
+		closedir(proc_dir);
 	}
 
-	closedir(proc_dir);
 }
