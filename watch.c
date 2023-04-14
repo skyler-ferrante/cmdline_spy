@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <time.h>
 
 /**
  * Simple cmdline watcher
@@ -18,7 +19,8 @@
  * 	- Prints results to stdout
 **/
 
-#define MAX_PROC_ID 100000
+#define MAX_PROC_ID 1000000
+#define USLEEP_TIME 5000
 
 int main(){
 	char current_file_name[BUFSIZ];
@@ -34,7 +36,7 @@ int main(){
 		if(!proc_dir)
 			abort();
 
-		usleep(50000);
+		usleep(USLEEP_TIME);
 		while((dir_e = readdir(proc_dir)) != NULL){
 			char* d_name = dir_e->d_name;
 			
@@ -43,6 +45,12 @@ int main(){
 				continue;
 
 			int num = atoi(d_name);
+
+			if(num>MAX_PROC_ID){
+				puts("PID larger than MAX_PROC_ID");
+				abort();
+			}
+
 			if(already_logged[num])
 				continue;
 			already_logged[num] = 1;
@@ -59,7 +67,7 @@ int main(){
 				if(buf[i] == '\0') buf[i] = ' ';
 
 			// guaranteed to be in-bounds
-			buf[ra-1] = '\n';	
+			buf[ra-1] = '\n';
 
 			write(1, buf, ra);
 		}
